@@ -141,7 +141,7 @@
 <h2>Danh sách sinh viên</h2>
 
 <div class="table-wrapper">
-    <div><a href="/createStudent">Thêm mới</a></div>
+    <div><a href="/students/createStudent">Thêm mới</a></div>
     <table class="fl-table">
         <thead>
         <tr>
@@ -160,8 +160,8 @@
                 <td><%= item.name %></td>
                 <td><%= item.email %></td>
                 <td><%= item.age %></td>
-                <td><a href="/editStudent/<%= item._id %>">Edit</a></td>
-                <form action="/deleteStudent/<%= item._id%>" method="post">
+                <td><a href="/students/editStudent/<%= item._id %>">Edit</a></td>
+                <form action="/students/deleteStudent/<%= item._id%>" method="post">
                     <td><button  onclick="return confirm('Bạn có chắc chắn xoá <%= item.name%>')" type="submit">Delete</button></td>
                 </form>
 

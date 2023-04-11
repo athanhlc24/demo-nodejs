@@ -1,5 +1,5 @@
-const  server = "mongodb://127.0.0.1:27017";
-const database = "demo_nodejs";
+const  server = process.env.DATABASE_SERVER;
+const database = process.env.DATABASE_NAME;
 let mongoose = require("mongoose");
 class Database{
     constructor() {// tu dong chay khi tao doi tuong

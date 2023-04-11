@@ -135,10 +135,10 @@
             }
         }
     </style>
-    <title>Danh sách sinh viên</title>
+    <title>Danh sách room</title>
 </head>
 <body>
-<h2>Danh sách sinh viên</h2>
+<h2>Danh sách room</h2>
 
 <div class="table-wrapper">
     <div><a href="/createStudent">Thêm mới</a></div>
@@ -158,12 +158,12 @@
                 <th scope="row"><%= key + 1%></th>
                 <td><%= item.room_name %></td>
                 <td><%= item.room_type %></td>
-                <td><a href="/editStudent/<%= item._id %>">Edit</a></td>
-                <form action="/deleteStudent/<%= item._id%>" method="post">
+                <td><a href="/editRoom/<%= item._id %>">Edit</a></td>
+                <form action="/deleteRoom/<%= item._id%>" method="post">
                     <td><button  onclick="return confirm('Bạn có chắc chắn xoá <%= item.room_name %>')" type="submit">Delete</button></td>
                 </form>
             </tr>
-
+        <%})%>
         <tbody>
     </table>
 </div>
