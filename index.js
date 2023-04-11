@@ -10,6 +10,7 @@ const app  = express();
 
 const database = require("./src/database");
 const Student = require("./src/models/student");
+const Subject = require("./src/models/subject");
 
 
 app.listen(PORT,()=>{
@@ -23,6 +24,9 @@ app.use(express.urlencoded({extended:true}));
 
 const studentRouter = require("./src/routes/student.route");
 app.use("/students",studentRouter);
+
+const subjectRouter = require("./src/routes/subject.route");
+app.use("/subjects",subjectRouter);
 
 
 

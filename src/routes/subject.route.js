@@ -1,0 +1,11 @@
+const express = require("express");
+const Subject = require("../models/student");
+let router = express.Router();
+let subjectController = require("../controllers/subject.controller");
+router.get("/",subjectController.get);
+router.get("/subject/create",subjectController.createForm);
+router.post("/subject/create",subjectController.save );
+router.get("/subject/edit/:id",subjectController.editForm);
+router.post("/subject/edit/:id",subjectController.update);
+router.post("/subject/delete/:id",subjectController.delete);
+module.exports = router;
