@@ -1,13 +1,20 @@
 const Student = require("../models/student");
-
-exports.get = (require,res)=>{
-    Student.find({}).then(rs=>{
+const permission = "student";
+exports.get = async function (req,res){// chuyển hàm về đồng bộ hoá
+    try {
+        const auth = req.session.auth;
+        const ls1 = await Student.find({});
+        // const ls2 = await Student.find({name:"Nam"});
         res.render("dsStudent",{
-            items:rs
+            items:ls1,
+            auth:auth,
+
         });
-    }).catch(err=>{
+    }catch(err) {
         res.send(err);
-    });
+    }
+
+
 }
 exports.createForm = (req,res)=>{
     res.render("createStudent");

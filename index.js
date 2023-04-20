@@ -21,13 +21,24 @@ app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+//start session
+const session = require("express-session");
+app.use(session({
+    resave:true,
+    saveUninitialized:true,
+    secret:"t2203e",
+    cookie:{
+        maxAge:3600000, //milisecond
+        // secure:true
+    }
+}))
 
 const studentRouter = require("./src/routes/student.route");
 app.use("/students",studentRouter);
-
 const subjectRouter = require("./src/routes/subject.route");
 app.use("/subjects",subjectRouter);
-
+const authRouter = require("./src/routes/auth.route");
+app.use("/auth",authRouter)
 
 
 app.get("/",function (req,res){// routing Bộ định tuyến
@@ -58,4 +69,5 @@ app.get("/room/dsRoom",function (req,res){
         res.send(err);
     });
 });
+
 
