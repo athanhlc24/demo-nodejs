@@ -8,13 +8,10 @@ exports.get = async function (req,res){// chuyển hàm về đồng bộ hoá
         res.render("dsStudent",{
             items:ls1,
             auth:auth,
-
         });
     }catch(err) {
         res.send(err);
     }
-
-
 }
 exports.createForm = (req,res)=>{
     res.render("createStudent");

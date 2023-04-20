@@ -30,7 +30,35 @@ exports.loginUser = async (req,res)=>{
         _id: existUser._id,
         name: existUser.name,
         email: existUser.email,
-        permissions: ["student","classroom","subject"]
+        permissions: existUser.permissions
     }
     res.redirect("/students/student");
+}
+exports.changePassForm = (req,res)=>{
+    res.render("auth/change-password");
+}
+exports.updatePass = async (req,res)=>{
+    if(req.body.new_password !== req.body.confirm_password){
+        return res.redirect("/auth/change-password");
+    }
+    const current_password = req.body.current_password;
+    const auth = req.session.auth;
+    let existUser = await User.findById(auth._id);
+    if(!existUser){
+        req.session.auth = null;
+        return res.redirect("/auth/login");
+    }
+    const checkPassword = await bcrypt.compare(current_password,existUser.password);
+    if(!checkPassword) return res.redirect("/auth/change-password");
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.new_password,salt);
+    User.findByIdAndUpdate(auth._id,{
+        password: hashPassword
+    }).then(rs=>{
+        // logout ra -> login
+        req.session.auth = null;
+        res.redirect("/auth/login");
+    }).catch(err=>{
+        res.status(401).send("Error");
+    })
 }
